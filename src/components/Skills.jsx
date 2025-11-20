@@ -4,18 +4,17 @@ import {
   SiReact,
   SiJavascript,
   SiTailwindcss,
-  SiFramer,
   SiGit,
   SiFigma,
+  SiPython,
 } from "react-icons/si";
-import skillsBg from "../assets/skillsbg.mp4";
-
+import skillsBgImage from "../assets/skills_new.jpg"; 
 
 const skills = [
   { name: "React", icon: <SiReact />, color: "#61DAFB" },
   { name: "JavaScript", icon: <SiJavascript />, color: "#F7E018" },
   { name: "Tailwind CSS", icon: <SiTailwindcss />, color: "#38BDF8" },
-  { name: "Framer Motion", icon: <SiFramer />, color: "#E600FF" },
+  { name: "Python", icon: <SiPython />, color: "#3776AB" },
   { name: "Git", icon: <SiGit />, color: "#F34F29" },
   { name: "Figma", icon: <SiFigma />, color: "#A259FF" },
 ];
@@ -69,7 +68,6 @@ function SkillCard({ skill, i }) {
   );
 }
 
-// Helper for infinite scroll on mobile
 const getInfiniteSkills = (skills, times = 3) => {
   let repeated = [];
   for (let i = 0; i < times; i++) {
@@ -79,23 +77,17 @@ const getInfiniteSkills = (skills, times = 3) => {
 };
 
 const Skills = () => {
-  // Calculate scroll distance (w-64 is 16rem = 256px, plus margin/padding)
-  const cardWidth = 264; // 256 + left/right margin (8px each)
+  const cardWidth = 264;
   const infiniteSkills = getInfiniteSkills(skills, 3);
   const scrollWidth = infiniteSkills.length * cardWidth;
 
   return (
     <section id="skills" className="relative overflow-hidden py-16 px-6">
-      {/* Background Video */}
-      <video
-        src={skillsBg}
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none select-none"
-        aria-hidden="true"
-      />
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-30 pointer-events-none select-none"
+        style={{ backgroundImage: `url(${skillsBgImage})` }}
+      ></div>
 
       {/* Heading and Grid */}
       <motion.div
@@ -105,12 +97,12 @@ const Skills = () => {
         viewport={{ once: true }}
         className="relative max-w-5xl mx-auto text-center z-10"
       >
-        <h2 className="text-5xl sm:text-5xl font-bold font-poppins pb-16 text-[#EDC001]">
+        <h2 className="text-5xl sm:text-5xl font-bold font-poppins pb-16 text-white">
           Skills
         </h2>
 
         {/* Mobile Only Carousel */}
-        <div className="sm:hidden w-full overflow-x-hidden mb-4 pb-2">
+        <div className="sm:hidden w-full backdrop-blur-sm overflow-x-hidden mb-4 pb-2">
           <motion.div
             className="flex flex-nowrap gap-8"
             drag="x"
@@ -119,7 +111,7 @@ const Skills = () => {
               x: [0, -scrollWidth],
               transition: {
                 x: {
-                  duration: 30, // increase for slower scroll, decrease for faster
+                  duration: 30,
                   repeat: Infinity,
                   ease: "linear",
                 },
@@ -137,8 +129,8 @@ const Skills = () => {
           </motion.div>
         </div>
 
-        {/* Grid for desktop/tablet (unchanged) */}
-        <div className="hidden sm:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 md:gap-y-12 justify-items-center">
+        {/* Grid for desktop/tablet */}
+        <div className="hidden sm:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 backdrop-blur-sm md:gap-y-12 justify-items-center">
           {skills.map((skill, i) => (
             <SkillCard key={skill.name} skill={skill} i={i} />
           ))}

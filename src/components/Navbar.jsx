@@ -1,11 +1,12 @@
-import { useState, useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { Link } from "react-scroll";
 import { HiMenu, HiX } from "react-icons/hi";
 import Logo from "../assets/logo_portfolio.png";
 
 const Navbar = () => {
   const [navOpen, setNavOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const links = [
     { id: 1, link: "home" },
@@ -16,9 +17,33 @@ const Navbar = () => {
     { id: 6, link: "contact" },
   ];
 
-  return (
-    <nav className="fixed w-full h-24 z-50 flex items-center justify-between bg-black">
+  // Listen to window scroll and toggle scrolled state
+  useEffect(() => {
+    const handleScroll = () => {
+      // when scrollY > 0, navbar becomes solid; when back to top, transparent
+      if (window.scrollY > 10) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
 
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // run once on mount
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  return (
+    <nav
+      className={`fixed w-full h-24 z-50 flex items-center justify-between transition-colors duration-300 ${
+        scrolled
+          ? "bg-black/90 backdrop-blur-md transition duration-500"
+          : "bg-transparent"
+      }`}
+    >
       {/* Logo */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -30,7 +55,6 @@ const Navbar = () => {
           src={Logo}
           alt="Logo"
           className="h-28 w-auto object-contain drop-shadow-lg"
-        // style={{ maxHeight: "56px" }}
         />
       </motion.div>
 
@@ -46,7 +70,14 @@ const Navbar = () => {
             key={id}
             className="cursor-pointer capitalize font-medium hover:text-[#EDC001] transition duration-300 hover:scale-105"
           >
-            <Link to={link} smooth duration={500} offset={-64} spy={false} hashSpy={false}>
+            <Link
+              to={link}
+              smooth
+              duration={500}
+              offset={-64}
+              spy={false}
+              hashSpy={false}
+            >
               {link}
             </Link>
           </li>
@@ -79,8 +110,9 @@ const Navbar = () => {
             : { y: -300, opacity: 0 }
         }
         transition={{ duration: 0.4, type: "spring", stiffness: 120 }}
-        className={`lg:hidden absolute top-24 left-0 w-full bg-black/95 backdrop-blur-xl shadow-xl py-10 ${navOpen ? "block" : "hidden"
-          }`}
+        className={`lg:hidden absolute top-24 left-0 w-full bg-black/70 backdrop-blur-xl shadow-xl py-10 ${
+          navOpen ? "block" : "hidden"
+        }`}
       >
         <ul className="flex flex-col items-center space-y-6 text-xl text-white">
           {links.map(({ id, link }) => (
@@ -93,7 +125,7 @@ const Navbar = () => {
                 smooth
                 duration={500}
                 offset={-64}
-                onClick={() => setNavOpen(false)} // Close menu on click
+                onClick={() => setNavOpen(false)}
               >
                 {link}
               </Link>
@@ -106,5 +138,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-

@@ -6,15 +6,15 @@ import {
   SiTailwindcss,
   SiGit,
   SiFigma,
-  SiPython,
+  SiGithub,
 } from "react-icons/si";
-import skillsBgImage from "../assets/skills_new.jpg"; 
+import skillsBgImage from "../assets/skills_new.png";
 
 const skills = [
   { name: "React", icon: <SiReact />, color: "#61DAFB" },
   { name: "JavaScript", icon: <SiJavascript />, color: "#F7E018" },
   { name: "Tailwind CSS", icon: <SiTailwindcss />, color: "#38BDF8" },
-  { name: "Python", icon: <SiPython />, color: "#3776AB" },
+  { name: "GitHub", icon: <SiGithub />, color: "#FFFFFF" },
   { name: "Git", icon: <SiGit />, color: "#F34F29" },
   { name: "Figma", icon: <SiFigma />, color: "#A259FF" },
 ];
@@ -102,7 +102,7 @@ const Skills = () => {
         </h2>
 
         {/* Mobile Only Carousel */}
-        <div className="sm:hidden w-full backdrop-blur-sm overflow-x-hidden mb-4 pb-2">
+        <div className="sm:hidden w-full overflow-x-hidden mb-4 pb-2">
           <motion.div
             className="flex flex-nowrap gap-8"
             drag="x"
@@ -130,7 +130,7 @@ const Skills = () => {
         </div>
 
         {/* Grid for desktop/tablet */}
-        <div className="hidden sm:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 backdrop-blur-sm md:gap-y-12 justify-items-center">
+        <div className="hidden sm:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 md:gap-y-12 justify-items-center">
           {skills.map((skill, i) => (
             <SkillCard key={skill.name} skill={skill} i={i} />
           ))}

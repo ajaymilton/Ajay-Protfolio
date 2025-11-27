@@ -20,7 +20,8 @@ const Contact = () => {
     setError("");
     setSent(false);
 
-    emailjs.sendForm(EMAIL_SERVICE_ID, EMAIL_TEMPLATE_ID, formRef.current, EMAIL_PUBLIC_KEY)
+    emailjs
+      .sendForm(EMAIL_SERVICE_ID, EMAIL_TEMPLATE_ID, formRef.current, EMAIL_PUBLIC_KEY)
       .then(() => {
         setSending(false);
         setSent(true);
@@ -29,26 +30,31 @@ const Contact = () => {
       .catch(() => {
         setSending(false);
         setError("An error occurred, please try again.");
-      });x``
+      });
   };
 
   return (
-    <section id="contact" className="min-h-[80vh] py-16 px-2 flex flex-col items-center justify-center relative overflow-hidden">
+    <section
+      id="contact"
+      className="relative z-0 min-h-[80vh] py-16 px-2 flex flex-col items-center justify-center overflow-hidden"
+    >
       <img
         src={contactBg}
         alt="Contact background"
-        className="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none select-none z-0"
+        className="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none select-none z-0"
         aria-hidden="true"
       />
-      <h2 className="text-4xl sm:text-5xl font-extrabold text-center text-white mb-16">
+
+      <h2 className="relative z-10 text-4xl sm:text-5xl font-extrabold text-center text-white mb-16">
         Let's Connect
       </h2>
+
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, type: "spring" }}
-        className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-10 rounded-2xl shadow-xl bg-gradient-to-br from-[#22210f] via-[#1a1a1a] to-[#000000] border border-[#EDC001]/20 p-6 md:p-10 backdrop-blur-sm"
+        className="relative z-10 max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-10 rounded-2xl shadow-xl bg-gradient-to-br from-[#22210f] via-[#1a1a1a] to-[#000000] border border-[#EDC001]/20 p-6 md:p-10 backdrop-blur-sm"
       >
         {/* Left Side */}
         <motion.div
@@ -57,14 +63,21 @@ const Contact = () => {
           transition={{ duration: 0.6, delay: 0.1, type: "spring" }}
           className="flex flex-col justify-center md:pr-10"
         >
-          <h2 className="text-5xl font-serif font-bold text-[#EDC001] mb-3 drop-shadow-md">Get in Touch</h2>
-          <div className="text-lg font-semibold text-white mb-2">I'd like to hear from you!</div>
+          <h2 className="text-5xl font-serif font-bold text-[#EDC001] mb-3 drop-shadow-md">
+            Get in Touch
+          </h2>
+          <div className="text-lg font-semibold text-white mb-2">
+            I'd like to hear from you!
+          </div>
           <p className="text-white mb-10 font-medium">
             If you have any inquiries or just want to say hi, please use the contact form!
           </p>
           <div className="flex items-center mb-4">
             <FaEnvelope className="text-[#EDC001] mr-2" />
-            <a href="mailto:ajaymilton711@gmail.com" className="text-white underline font-medium hover:text-[#EDC001] transition">
+            <a
+              href="mailto:ajaymilton711@gmail.com"
+              className="text-white underline font-medium hover:text-[#EDC001] transition"
+            >
               ajaymilton711@gmail.com
             </a>
           </div>

@@ -12,7 +12,7 @@ const projects = [
     title: "School Website",
     stack: "React, Tailwind CSS",
     description:
-      "A freelance project for a school, delivering an informative and interactive website with galleries, announcements, and easy navigation for staff and students.",
+      "A project for a school, delivering an informative and interactive website with galleries, announcements, and easy navigation for staff and students.",
   },
   {
     title: "Manpower Company Website",
